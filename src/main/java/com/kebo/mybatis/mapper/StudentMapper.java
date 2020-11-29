@@ -2,6 +2,7 @@ package com.kebo.mybatis.mapper;
 
 import com.kebo.mybatis.po.Student;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface StudentMapper {
     Integer deleteByConditions(List<Integer> ids);
 
     Integer insertByConditions(Student student);
+
+    List<Student> getListByRowBounds(RowBounds rowBounds);
 }

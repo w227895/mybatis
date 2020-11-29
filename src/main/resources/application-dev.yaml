@@ -17,7 +17,7 @@ logging:
   level:
     com:
       kebo:
-        mybatis : info
+        mybatis : debug
 
 
 

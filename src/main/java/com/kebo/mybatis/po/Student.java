@@ -1,11 +1,14 @@
 package com.kebo.mybatis.po;
 
+import java.io.Serializable;
+
 /**
  * @description:
  * @author: kb
  * @create: 2020-11-25 21:18
  **/
-public class Student {
+public class Student implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private String name;
     private Double sal;

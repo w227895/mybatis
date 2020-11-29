@@ -4,12 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.kebo.mybatis.mapper.StudentMapper;
 import com.kebo.mybatis.po.Student;
+import org.apache.ibatis.session.RowBounds;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @SpringBootTest
@@ -19,10 +20,13 @@ class MybatisApplicationTests {
     private StudentMapper studentMapper;
 
     @Test
+    @Transactional
     void testSelectById() {
-        Student student = studentMapper.selectById(1);
+        Student student = studentMapper.selectById(2);
         System.out.println(student);
-
+        student.setName("kebo");
+        Student student1 = studentMapper.selectById(2);
+        System.out.println(student1);
     }
 
     @Test
@@ -41,6 +45,8 @@ class MybatisApplicationTests {
         for (Student student : studentList) {
             System.out.println(student);
         }
+
+        List<Student> studentList1 = studentMapper.findAll();
     }
 
     @Test
@@ -101,4 +107,13 @@ class MybatisApplicationTests {
         System.out.println(number);
     }
 
+
+    @Test
+    void testRowBounds() {
+        RowBounds rowBounds=new RowBounds(0,2);
+        List<Student> listByRowBounds = studentMapper.getListByRowBounds(rowBounds);
+        for (Student s:listByRowBounds) {
+            System.out.println(s);
+        }
+    }
 }
